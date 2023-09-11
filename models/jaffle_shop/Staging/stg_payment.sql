@@ -1,2 +1,2 @@
-{{ config(materialized='table',database='QWT_ANALYTICS', schema='staging') }}
+{{ config(materialized='table',database='JS_PROD_ANALYTICS', schema='staging') }}
 select * from raw.stripe.payment
