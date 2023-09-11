@@ -1,0 +1,24 @@
+models:
+  - name: stg_customers
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+          
+
+  - name: stg_orders
+    description: "{{doc('orders')}}"
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+      - name: user_id
+        tests:
+          - not_null
+          
