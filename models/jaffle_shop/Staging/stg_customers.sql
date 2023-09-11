@@ -1,4 +1,4 @@
-{{ config(materialized='table', database='QWT_ANALYTICS', schema='staging',
+{{ config(materialized='table', database='JS_PROD_ANALYTICS', schema='staging',
     pre_hook="insert into ANALYTICS.Auditing.dbtmodelsaudit(modelname,model_starttime,model_endtime)
      values ('{{this}}',current_timestamp(),null);",
      post_hook = "update ANALYTICS.Auditing.dbtmodelsaudit
