@@ -1,5 +1,14 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table', database='QWT_ANALYTICS', schema='staging',
+    pre_hook="insert into ANALYTICS.Auditing.dbtmodelsaudit(modelname,model_starttime,model_endtime)
+     values ('{{this}}',current_timestamp(),null);",
+     post_hook = "update ANALYTICS.Auditing.dbtmodelsaudit
 
- select * from {{env_var ('DBT_Source_Database','raw')}}.jaffle_shop.{{env_var ('DBT_Source_Table','customers')}}
+ set MODEL_ENDTIME=current_timestamp where MODELNAME='{{this}}'
 
-where id>={{var('custid',40) }}
+ ") }}
+
+ select 
+  {{dbt_utils.generate_surrogate_key(['id','first_name','last_name']) }} as cust_hash_id,
+ * from raw.jaffle_shop.customers
+
+

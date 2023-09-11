@@ -1,4 +1,4 @@
-{{ config(materialized='table',alias='customerorders', schema='Transforming',
+{{ config(materialized='table', schema='Transforming',
             sql_header = "alter session set timezone ='Asia/Kolkata';" ) }}
 with customers as (
 

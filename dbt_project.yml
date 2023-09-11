@@ -36,8 +36,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  Cognizant_DBT_learning:
-    # Applies to all files under models/example/
-    example:
-      materialized: table
+  pre-hook: "insert into ANALYTICS.AUDITING.DBTMODELSAUDIT(modelname,model_starttime,model_endtime) values ('{{this}}', current_timestamp(), null);"
+  post-hook: "update ANALYTICS.AUDITING.DBTMODELSAUDIT set model_endtime = current_timestamp() where modelname = '{{this}}';"
+  materialized: table
+  database: ANALYTICS
       

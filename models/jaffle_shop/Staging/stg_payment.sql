@@ -1,2 +1,2 @@
-{{ config(materialized='table') }}
-select *,{{cents_to_dollars('AMOUNT')}} as dollar_amount from raw.stripe.payment
+{{ config(materialized='table',database='QWT_ANALYTICS', schema='staging') }}
+select * from raw.stripe.payment

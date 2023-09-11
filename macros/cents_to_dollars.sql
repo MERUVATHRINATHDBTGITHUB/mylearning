@@ -2,5 +2,4 @@
 
 ({{column}}/100):: numeric(16,{{precision}})
 
-
 {% endmacro %}

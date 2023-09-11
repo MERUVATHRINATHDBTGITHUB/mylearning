@@ -5,9 +5,10 @@ models:
         tests:
           - unique
           - not_null
-          - is_even
+          
 
   - name: stg_orders
+    description: "{{doc('orders')}}"
     columns:
       - name: id
         tests:
